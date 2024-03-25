@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 217. 存在重复元素
+            // 给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
+            // 哈希表的基础应用
+            var containsDuplicate = function (nums) {
+                const store = {}
+                for (let i = 0; i < nums.length; i++) {
+                    const num = nums[i]
+                    if (store[num]) {
+                        return true
+                    }
+                    store[num] = true
+                }
+                return false
+            }
+
+            // 242. 有效的字母异位词
+            // 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。（若 s 和 t 中每个字符出现的次数都相同，则称 s 和 t 互为字母异位词。）
+            // 哈希表但是存储次数，记得先判断后加减
+            var isAnagram = function (s, t) {
+                if (s.length !== t.length) {
+                    return false
+                }
+                let store = {}
+                for (let c of s) {
+                    store[c] = (store[c] || 0) + 1
+                }
+                for (let c of t) {
+                    if (!store[c]) {
+                        return false
+                    }
+                    store[c]--
+                }
+                return true
+            }
+
+            // 1. 两数之和
+            // 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+            // 哈希表但是存储减法
+            var twoSum = function (nums, target) {
+                const store = {}
+                for (let i = 0; i < nums.length; i++) {
+                    const num = nums[i]
+                    if (store[num] !== undefined) {
+                        return [store[num], i]
+                    }
+                    store[target - num] = i
+                }
+            }
+
+            // 49. 字母异位词分组
+            // 给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。(字母异位词 是由重新排列源单词的所有字母得到的一个新单词)
+            // 字符排序统一后使用
+            var groupAnagrams = function (strs) {
+                const store = {}
+                for (let str of strs) {
+                    let sameStr = str.split("").sort().join("")
+                    if (store[sameStr]) {
+                        store[sameStr].push(str)
+                    } else {
+                        store[sameStr] = [str]
+                    }
+                }
+                return Object.values(store)
+            }
+
+            // 347. 前 K 个高频元素
+            // 给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。
+            //
+            var topKFrequent = function (nums, k) {}
+        </script>
+    </body>
+</html>
